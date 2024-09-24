@@ -53,6 +53,7 @@ public class User implements UserDetails, Principal {
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdDateTime;
     @LastModifiedDate
+
     @CreatedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDateTime;
@@ -87,12 +88,12 @@ public class User implements UserDetails, Principal {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return !accountLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return !accountLocked;
+        return true;
     }
 
     @Override
@@ -100,7 +101,7 @@ public class User implements UserDetails, Principal {
         return enabled;
     }
 
-    private String fullName(){
+    public String fullName(){
         return firstName + " " + lastName;
     }
 

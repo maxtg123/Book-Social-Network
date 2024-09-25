@@ -58,10 +58,7 @@ public class User implements UserDetails, Principal {
     @Column(insertable = false)
     private LocalDateTime lastModifiedDateTime;
 
-    @Override
-    public String getName(){
-        return email;
-    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -83,12 +80,12 @@ public class User implements UserDetails, Principal {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !accountLocked;
+        return  !accountLocked;
     }
 
     @Override
@@ -99,6 +96,13 @@ public class User implements UserDetails, Principal {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+
+
+    @Override
+    public String getName(){
+        return email;
     }
 
     public String fullName(){
